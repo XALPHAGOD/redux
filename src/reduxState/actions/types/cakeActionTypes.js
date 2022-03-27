@@ -1,0 +1,4 @@
+const ADD_CAKE = "ADD_CAKE";
+const REMOVE_CAKE = "REMOVE_CAKE";
+
+export { ADD_CAKE, REMOVE_CAKE };

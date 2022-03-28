@@ -5,6 +5,7 @@ import { startFetch } from "../reduxState/actions/creators/asyncFetchActionCreat
 export default function AsyncFetch() {
   const [url, setUrl] = useState("");
   const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
   return (
     <div
       style={{
@@ -27,8 +28,11 @@ export default function AsyncFetch() {
       <button
         type="submit"
         onClick={() => {
-          store.subscribe(() => setData(store.getState().async_fetch.data));
-          store.dispatch(startFetch(url));
+          store.subscribe(() => {
+            setData(store.getState().async_fetch.data);
+            setError(store.getState().async_fetch.error);
+          });
+          if (url !== "") store.dispatch(startFetch(url));
         }}
       >
         Fetch
@@ -48,6 +52,7 @@ export default function AsyncFetch() {
           ))}
         </ul>
       </div>
+      {error && <h3>{error}</h3>}
     </div>
   );
 }

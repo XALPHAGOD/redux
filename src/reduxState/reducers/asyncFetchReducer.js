@@ -14,9 +14,10 @@ export default function asyncReducer(state = asyncStore, action) {
         ...state,
         loading: false,
         data: [...state.data, ...action.data],
+        error: null,
       };
     case FETCH_FAILURE:
-      return { ...state, loading: false, error: action.error };
+      return { ...state, data: [], loading: false, error: action.error };
     default:
       return state;
   }
